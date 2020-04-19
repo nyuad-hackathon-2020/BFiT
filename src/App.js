@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Video from "./components/video";
 import "./App.css";
 import "./styles/video.css";
+import Friends from "./components/Friends";
+
 import Toolbar from "./components/Toolbar.js";
 import MainPage from "./components/MainPage.js";
 import WorkoutPage from "./components/WorkoutPage.js";
@@ -18,8 +20,11 @@ class App extends Component {
     this.remoteVideoref = React.createRef();
     this.state = {
       currentBodyPart: " ",
+      currentBodyPartLinks: " ",
       exerciseList: [],
-      durationList: []
+      durationList: [],
+      linkList: [],
+      hasSelected: false
     };
 
     this.selectedBodyPart = this.selectedBodyPart.bind(this);
@@ -32,22 +37,41 @@ class App extends Component {
     this.setState({
       currentBodyPart: bodyPart,
       exerciseList: [],
-      durationList: []
+      durationList: [],
+      linkList: []
     });
 
     const preObject = document.getElementById("workoutOverviewInfo");
-    document.getElementById("workoutOverviewInfo").innerHTML = "";
-    console.log(this.state.currentBodyPart);
+    // document.getElementById("workoutOverviewInfo").innerHTML = "";
+
+    const linkList = firebase
+      .database()
+      .ref()
+      .child(this.state.currentBodyPart + "links");
 
     const rootRef = firebase
       .database()
       .ref()
       .child(this.state.currentBodyPart);
 
+    linkList.on("value", snap => {
+      const tempLinkList = [];
+
+      snap.forEach(function(child) {
+        var link = child.val();
+        tempLinkList.push(link);
+        console.log(link);
+        self.setState({
+          linkList: tempLinkList
+        });
+      });
+    });
+
     const bodyWorkout = rootRef.child("Lose Weight");
     bodyWorkout.on("value", snap => {
       const tempexerciselist = [];
       const tempdurationlist = [];
+      const tempLinkList = [];
 
       snap.forEach(function(child) {
         const li = document.createElement("h1");
@@ -61,96 +85,50 @@ class App extends Component {
 
         self.setState({
           exerciseList: tempexerciselist,
-          durationList: tempdurationlist
+          durationList: tempdurationlist,
+          hasSelected: true
         });
 
         li.innerText = exerciseName + ": " + duration;
-        preObject.appendChild(li);
+        // preObject.appendChild(li);
       });
     });
   };
 
   componentDidMount() {
-    const peerConfig = null;
-    this.pc = new RTCPeerConnection(peerConfig);
-    const contraints = { video: true };
+    const self = this;
 
-    function gotData(data) {
-      console.log(data);
-    }
+    const rootRef = firebase
+      .database()
+      .ref()
+      .child(this.state.currentBodyPart);
+    const bodyWorkout = rootRef.child("Lose Weight");
+    bodyWorkout.on("value", snap => {
+      const tempexerciselist = [];
+      const tempdurationlist = [];
+      const tempLinkList = [];
 
-    function errData(err) {
-      console.log(err);
-    }
+      snap.forEach(function(child) {
+        const li = document.createElement("h1");
+        li.className = "aClassName";
 
-    // const speedRef = rootRef.child("speed");
-    // rootRef.on("value", snap => {
-    //   console.log(snap.val());
-    //   this.setState({
-    //     speed: snap.val()
-    //   });
-    // });
+        console.log(child.val());
+        var exerciseName = child.key;
+        var duration = child.val();
+        tempexerciselist.push(exerciseName);
+        tempdurationlist.push(duration);
 
-    this.pc.onicecandidate = e => {
-      if (e.candidate) console.log(JSON.stringify(e.candidate));
-    };
+        self.setState({
+          exerciseList: tempexerciselist,
+          durationList: tempdurationlist,
+          hasSelected: true
+        });
 
-    this.pc.oniceconnectionstatechange = e => {
-      console.log(e);
-    };
-
-    this.pc.ontrack = e => {
-      this.remoteVideoref.current.srcObject = e.streams[0];
-    };
-
-    const success = stream => {
-      this.localVideoref.current.srcObject = stream;
-      this.pc.addStream(stream);
-    };
-
-    const failure = e => {
-      console.log("Error occurred!", e);
-    };
-
-    navigator.mediaDevices
-      .getUserMedia(contraints)
-      .then(success)
-      .catch(failure);
+        li.innerText = exerciseName + ": " + duration;
+        // preObject.appendChild(li);
+      });
+    });
   }
-
-  createOffer = () => {
-    this.pc.createOffer({ offerToReceiveVideo: 1 }).then(
-      sdp => {
-        console.log(JSON.stringify(sdp));
-        this.pc.setLocalDescription(sdp);
-      },
-      e => {}
-    );
-  };
-
-  setRemoteDescription = () => {
-    const desc = JSON.parse(this.textref.value);
-
-    this.pc.setRemoteDescription(new RTCSessionDescription(desc));
-  };
-
-  createAnswer = () => {
-    console.log("answer");
-    this.pc.createAnswer({ offerToReceiveVideo: 1 }).then(
-      sdp => {
-        console.log(JSON.stringify(sdp));
-        this.pc.setLocalDescription(sdp);
-      },
-      e => {}
-    );
-  };
-
-  addCandidate = () => {
-    const candidate = JSON.parse(this.textref.value);
-    console.log("adding candidates", candidate);
-
-    this.pc.addIceCandidate(new RTCIceCandidate(candidate));
-  };
 
   render() {
     return (
@@ -166,7 +144,9 @@ class App extends Component {
                 <WorkoutPage
                   selectedWorkout={this.state.currentBodyPart}
                   workoutExercises={this.state.exerciseList}
+                  linkList={this.state.linkList}
                   durations={this.state.durationList}
+                  hasSelected={this.state.hasSelected}
                 />
               </React.Fragment>
             )}
@@ -182,6 +162,7 @@ class App extends Component {
                 <MainPage
                   selectedBodyPart={this.selectedBodyPart}
                   selectedWorkout={this.state.currentBodyPart}
+                  hasSelected={this.state.hasSelected}
                 />{" "}
               </React.Fragment>
             )}
@@ -194,6 +175,16 @@ class App extends Component {
               <React.Fragment>
                 {" "}
                 <Dashboard />{" "}
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/friends"
+            render={props => (
+              <React.Fragment>
+                {" "}
+                <Friends />{" "}
               </React.Fragment>
             )}
           />

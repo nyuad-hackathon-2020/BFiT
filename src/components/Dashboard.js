@@ -3,6 +3,10 @@ import UserImage from "../images/user.jpg";
 import { Icon, InlineIcon } from "@iconify/react";
 import starIcon from "@iconify/icons-typcn/star";
 import calendarIcon from "@iconify/icons-oi/calendar";
+import CoreImageOne from "../images/workout5.png";
+import CardioImageOne from "../images/workout4.png";
+import CoreImageTwo from "../images/workout3.png";
+import CardioImageTwo from "../images/workout1.png";
 
 export default function Dashboard() {
   return (
@@ -101,29 +105,34 @@ export default function Dashboard() {
           <div class="column">
             <div class="card">
               <h3>Complete Core</h3>
+              <img id="dashboardPic" src={CoreImageOne}></img>
             </div>
           </div>
           <div class="column">
             <div class="card">
               <h3>Cardio Blaster II</h3>
+              <img id="dashboardPic" src={CardioImageOne}></img>
             </div>
           </div>
           <div class="column">
             <div class="card">
               {" "}
               <h3>Abs (Intermediate)</h3>
+              <img id="dashboardPic" src={CoreImageTwo}></img>
             </div>
           </div>
           <div class="column">
             <div class="card">
               {" "}
               <h3>Lower Body</h3>
+              <img id="dashboardPic" src={CardioImageTwo}></img>
             </div>
           </div>
           <div class="column">
             <div class="card">
               {" "}
               <h3>Pilates</h3>
+              <img id="dashboardPic" src={CardioImageOne}></img>
             </div>
           </div>
         </div>

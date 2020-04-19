@@ -3,7 +3,7 @@ import { Icon, InlineIcon } from "@iconify/react";
 import barsIcon from "@iconify/icons-fa/bars";
 import dashboardIcon from "@iconify/icons-il/dashboard";
 import { Link } from "react-router-dom";
-
+import BFitLogo from "../images/bfitLogo.jpg";
 import React, { Component } from "react";
 
 export class Toolbar extends Component {
@@ -21,7 +21,9 @@ export class Toolbar extends Component {
     return (
       <div>
         <div class="topnav" id="myTopnav">
-          <a href="/">Professional Trainer</a>
+          <a href="/">
+            <img src={BFitLogo} style={{ width: "80px" }} id="logo"></img>
+          </a>
           <div class="topnav-right">
             <Icon
               icon={barsIcon}
@@ -30,19 +32,19 @@ export class Toolbar extends Component {
               activeClassName="activeNav"
               onClick={() => this.expand()}
             />
-            <a href="/" activeClassName="activeNav">
+            <a href="/" activeClassName="activeNav" className="links">
               About
             </a>
-            <a href="/" activeClassName="activeNav">
+            <a href="/" activeClassName="activeNav" className="links">
               Contact
             </a>
             {/* <a href="/" activeClassName="activeNav"></a> */}
 
-            <Link to="/dashboard" activeClassName="activeNav">
+            <Link to="/dashboard" activeClassName="activeNav" className="links">
               <Icon icon={dashboardIcon} />
-              Dashboard{" "}
+              &nbsp;&nbsp;&nbsp;Dashboard{" "}
             </Link>
-            <Link to="/dashboard" activeClassName="activeNav">
+            <Link to="/friends" activeClassName="activeNav" className="links">
               Friends{" "}
             </Link>
           </div>

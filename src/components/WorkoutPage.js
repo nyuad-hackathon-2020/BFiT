@@ -20,6 +20,8 @@ export class WorkoutPage extends Component {
     this.state = {
       durationList: this.props.durations,
       workoutList: this.props.workoutExercises,
+      linkList: this.props.linkList,
+      currentLink: "",
       currentExercise: "",
       nextExercise: "",
       currentTime: 0,
@@ -29,7 +31,8 @@ export class WorkoutPage extends Component {
       countdownCount: "",
       breakCount: 30,
       breakOn: false,
-      finished: false
+      finished: false,
+      totalWorkoutTime: 0
     };
     this.startTime = this.startTime.bind(this);
     this.renderWorkoutTimes = this.renderWorkoutTimes.bind(this);
@@ -49,7 +52,8 @@ export class WorkoutPage extends Component {
         self.setState({
           currentTime: self.state.durationList[i],
           nextExercise: self.state.workoutList[i + 1],
-          currentExercise: self.state.workoutList[i]
+          currentExercise: self.state.workoutList[i],
+          currentLink: self.state.linkList[i]
         });
       }
       var counterLast = document.getElementById("counterNumber");
@@ -155,7 +159,8 @@ export class WorkoutPage extends Component {
       setInterval(
         () =>
           this.setState({
-            currentTime: this.state.currentTime - 1
+            currentTime: this.state.currentTime - 1,
+            totalWorkoutTime: this.state.totalWorkoutTime + 1
           }),
         1000
       );
@@ -180,14 +185,29 @@ export class WorkoutPage extends Component {
     return (
       <div>
         <div style={{ display: this.state.finished == true ? "none" : "" }}>
-          <div id="workoutTitle">
+          <Router>
+            <React.Fragment>
+              <div id="currentExerciseTitle">
+                <h1>{this.state.currentExercise}</h1>
+              </div>
+              <Route path="/" exact component={goToRoomInput} />
+              <Route path="/:roomId" exact component={Video} />
+              <div id="animatedGif">
+                <img src={this.state.currentLink}></img>
+              </div>
+              <button id="playIcon" onClick={() => this.startTime()}>
+                <Icon icon={playIcon} />
+              </button>
+            </React.Fragment>
+          </Router>
+          {/* <div id="workoutTitle">
             {this.props.selectedWorkout} Workout!
             <h1>Next exercise:</h1>
             <h1>
               {this.state.currentExercise}: {this.state.currentTime}
             </h1>
             <h1>{this.state.nextExercise}</h1>
-          </div>
+          </div> */}
           {/* <iframe
           width="560"
           height="315"
@@ -196,27 +216,32 @@ export class WorkoutPage extends Component {
           allow="autoplay; encrypted-media"
           allowfullscreen
         ></iframe> */}
-          <div id="animatedGif">
-            <img src={CalfRaise}></img>
-          </div>
           <div
             id="counterNumber"
             style={{ display: this.state.almostDone ? "block" : "none" }}
           >
+            {/* {this.state.currentTime} */}
+          </div>
+          <div
+            id="bottomControlsWorkout"
+            style={{
+              color: this.state.almostDone ? "red" : "black",
+              fontSize: this.state.almostDone ? "red" : "black"
+            }}
+          >
+            {" "}
+            {/* <button onClick={() => this.startTime()}>
+              <Icon icon={playIcon} />
+            </button> */}
             {this.state.currentTime}
           </div>
-          <div id="bottomControlsWorkout">
+
+          <div id="totalTimeWorkout">
             {" "}
-            <button onClick={() => this.startTime()}>
-              <Icon icon={playIcon} />
-            </button>
+            {/* Total Workout Time: <br></br>
+            {this.state.totalWorkoutTime} */}
           </div>
-          <Router>
-            <React.Fragment>
-              <Route path="/" exact component={goToRoomInput} />
-              <Route path="/:roomId" exact component={Video} />
-            </React.Fragment>
-          </Router>
+
           {/* <ul onClick={() => this.startTime()}>
           {listItems}, {durationList}
         </ul> */}
