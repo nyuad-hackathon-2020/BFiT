@@ -1,10 +1,14 @@
-# BFit
+# BFiT
 
-BFit is a social app that allows users to work out with each other.
+During these rough pandemic times, we are forced to stay in quarantine at our homes. This causes minimal movement activity which isn't great for our health. It is very important to stay fit but it is difficult to get the motivation. **BFiT** for _Be Focused in Training_ is a social web app that allows users to workout and have training sessions with their family, friends, or anyone who wants to stay fit and healthy. BFiT is your very own personal trainer with planned training sessions catered towards your personal needs!
 
 <p align="center"><img src="assets/logo.jpg" width=500px></p>
 
 ## Team Members
+
+Due to the combined efforts of our team members, BFiT secured the **3rd** place in the hackathon!
+
+<p align="center"><img src="assets/team.jpeg" height=400px></p>
 
 ### Students:
 
