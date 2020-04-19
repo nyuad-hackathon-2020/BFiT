@@ -1,3 +1,4 @@
-# Fitness
+# BFit
 
-A social platform that would allow users to have workout sessions together.
+BFit is a social app that allows users to work out with each other.
+
