@@ -12,7 +12,7 @@ BFit is a social app that allows users to work out with each other.
 *	[Julia Itani](https://github.com/Jules97) (Islamic University of Lebanon, Lebanon, julia97itani@gmail.com)
 *	[Steven Wyks](https://github.com/slw515) (New York University Abu Dhabi, UAE, slw515@nyu.edu)
 *	[Oona Pecson](https://github.com/piinkoon) (NYU Shanghai, USA, op531@nyu.edu)
-*	Haoquan Wang (NYU Shanghai, China, hw1882@nyu.edu)
+*	[Haoquan Wang](https://github.com/KENNETH233) (NYU Shanghai, China, hw1882@nyu.edu)
 *	[Yu Yan](https://github.com/Sonnyyy77) (NYU Shanghai, China, yy2627@nyu.edu)
 
 ### Mentors:
