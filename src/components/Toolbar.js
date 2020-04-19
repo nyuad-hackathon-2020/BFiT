@@ -32,12 +32,9 @@ export class Toolbar extends Component {
               activeClassName="activeNav"
               onClick={() => this.expand()}
             />
-            <a href="/" activeClassName="activeNav" className="links">
-              About
-            </a>
-            <a href="/" activeClassName="activeNav" className="links">
-              Contact
-            </a>
+            <Link to="/plans" activeClassName="activeNav" className="links">
+              Plans{" "}
+            </Link>
             {/* <a href="/" activeClassName="activeNav"></a> */}
 
             <Link to="/dashboard" activeClassName="activeNav" className="links">

@@ -8,7 +8,7 @@ import playIcon from "@iconify/icons-uil/play";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import checkmarkIcon from "@iconify/icons-gridicons/checkmark";
 import { Link } from "react-router-dom";
-
+import pauseIcon from "@iconify/icons-mdi/pause";
 var i = -1;
 
 export class WorkoutPage extends Component {
@@ -196,7 +196,11 @@ export class WorkoutPage extends Component {
                 <img src={this.state.currentLink}></img>
               </div>
               <button id="playIcon" onClick={() => this.startTime()}>
-                <Icon icon={playIcon} />
+                {this.state.totalWorkoutTime > 0 ? (
+                  <Icon icon={pauseIcon} />
+                ) : (
+                  <Icon icon={playIcon} />
+                )}{" "}
               </button>
             </React.Fragment>
           </Router>

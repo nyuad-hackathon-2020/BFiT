@@ -3,6 +3,7 @@ import Video from "./components/video";
 import "./App.css";
 import "./styles/video.css";
 import Friends from "./components/Friends";
+import Plans from "./components/Plans.js";
 
 import Toolbar from "./components/Toolbar.js";
 import MainPage from "./components/MainPage.js";
@@ -185,6 +186,16 @@ class App extends Component {
               <React.Fragment>
                 {" "}
                 <Friends />{" "}
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/plans"
+            render={props => (
+              <React.Fragment>
+                {" "}
+                <Plans />{" "}
               </React.Fragment>
             )}
           />

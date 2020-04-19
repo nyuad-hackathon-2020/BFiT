@@ -226,7 +226,7 @@ html {
   flex-shrink: 0;
   min-width: 100%;
   min-height: 100%;
-  filter: contrast(0.7) brightness(0.7);
+  filter: contrast(0.7) brightness(0.5);
 }
 
 .jumboText {
@@ -460,7 +460,8 @@ html {
 }
 
 .calendar {
-  width: 300px;
+  width: 180px;
+  height: 120px;
   background-color: #f64c71;
   box-sizing: border-box;
   box-shadow: 0 5px 50px rgba(#000, 0.5);
@@ -505,6 +506,7 @@ html {
   justify-content: center;
   height: 25px;
   color: #262626;
+  cursor: pointer;
 }
 
 .fadeModalPresent {
@@ -515,8 +517,79 @@ html {
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 20px;
+  margin-top: 14px;
+  margin-right: 14px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#acceptDate {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 15px;
   margin-right: 20px;
   cursor: pointer;
   z-index: 2;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/*Plans page */
+#planHeader {
+  font-size: 100px;
+}
+
+.rowPlan {
+  display: flex;
+  margin: auto 350px;
+}
+.columnPlan {
+  flex: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+  text-align: center;
+  margin: 20px;
+}
+
+.columnPlan h1 {
+  font-weight: 900;
+}
+
+.columnPlan h4 {
+  font-weight: 300;
+  color: #36454f;
+}
+
+.columnPlan h2 {
+  font-size: 60px;
+  margin-top: 10px;
+}
+
+#leftBorder {
+  border-left: 2px solid #f64c71;
+}
+
+.MuiInputBase-input {
+  margin: 20px !important;
+  font-family: "Roboto Condensed", sans-serif !important;
+}
+
+#copiedToBoard {
+  position: fixed;
+  width: 300px;
+  top: 0px;
+  height: 40px;
+  right: 25%;
+  padding: 10px;
+  left: 50%;
+  margin-left: -150px;
+  background-color: pink;
+  display: none;
+  -webkit-border-bottom-left-radius: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  -moz-border-radius-bottomright: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }

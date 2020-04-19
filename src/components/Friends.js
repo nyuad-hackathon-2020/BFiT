@@ -1,9 +1,20 @@
-import React, { Component } from "react";
+// import React/, { Component } from "react";
 import { Icon, InlineIcon } from "@iconify/react";
 import starIcon from "@iconify/icons-typcn/star";
 import calendarIcon from "@iconify/icons-oi/calendar";
 import arrowRight from "@iconify/icons-el/arrow-right";
 import timesIcon from "@iconify/icons-fa-solid/times";
+import DateFnsUtils from "@date-io/date-fns";
+import React, { useState, Component } from "react";
+import UIPicker from "./UIPicker.js";
+import $ from "jquery";
+
+import {
+  DatePicker,
+  TimePicker,
+  DateTimePicker,
+  MuiPickersUtilsProvider
+} from "@material-ui/pickers";
 
 export class Friends extends Component {
   constructor(props) {
@@ -19,6 +30,17 @@ export class Friends extends Component {
       fadedOut: fadeOutLocal
     });
   }
+  confirmSchedule() {
+    $("#copiedToBoard").show();
+    setTimeout(function() {
+      $("#copiedToBoard").fadeOut("slow");
+    }, 1500);
+    var fadeOutLocal = !this.state.fadedOut;
+    this.setState({
+      fadedOut: fadeOutLocal
+    });
+  }
+
   render() {
     return (
       <div>
@@ -110,6 +132,7 @@ export class Friends extends Component {
             </div>
           </div>
         </div>
+        <div id="copiedToBoard">Appointment Set!</div>
 
         <div
           class="calendar"
@@ -124,7 +147,19 @@ export class Friends extends Component {
               this.fadeOut();
             }}
           />
-          <div class="calendar__picture">
+          <div
+            id="acceptDate"
+            onClick={() => {
+              this.fadeOut();
+            }}
+            onClick={() => {
+              this.confirmSchedule();
+            }}
+          >
+            Verify
+          </div>
+          <UIPicker style={{ margin: "10px" }} />
+          {/* <div class="calendar__picture">
             <h2>19, Sunday</h2>
             <h3>April</h3>
           </div>
@@ -169,7 +204,7 @@ export class Friends extends Component {
             <div class="calendar__number">28</div>
             <div class="calendar__number">29</div>
             <div class="calendar__number">30</div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
