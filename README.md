@@ -24,3 +24,8 @@ Due to the combined efforts of our team members, BFiT secured the **3rd** place 
 *	[Poseidon Ho](https://github.com/oi7) (Outliers Fund, USA, p@outliers.fund)
 *	[Christian Grewell](https://github.com/clg236) (Professor, NYU Shanghai, China, christian@nyu.edu)
 *	[Xu Li](https://github.com/xu-li) (Senior Applications Developer, NYU Shanghai, China, xu.li@nyu.edu)
+
+### Screenshots:
+![](screenshot/screenshotBFiT.png)
+![](screenshot/screenshotBFiT2.png)
+
